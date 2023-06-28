@@ -9,12 +9,13 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+      - working-directory: ./api
 
       - uses: actions/setup-node@v3
         with:
           node-version: 16
           cache: 'npm'
       
+      - working-directory: ./api
       - run: npm ci
-
       - run: npm run test

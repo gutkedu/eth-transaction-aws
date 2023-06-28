@@ -1,5 +1,5 @@
 resource "aws_ecs_task_definition" "backend_task" {
-  family = "backend_example_app_family"
+  family = "eth_api_backend_family"
 
   // Fargate is a type of ECS that requires awsvpc network_mode
   requires_compatibilities = ["FARGATE"]
@@ -15,8 +15,8 @@ resource "aws_ecs_task_definition" "backend_task" {
   container_definitions = <<EOT
 [
     {
-        "name": "example_app_container",
-        "image": "683803546978.dkr.ecr.us-east-1.amazonaws.com/ecr_example_repo:latest",
+        "name": "eth_api_container",
+        "image": "683803546978.dkr.ecr.us-east-1.amazonaws.com/eth_api_erc_repo:latest",
         "memory": 512,
         "essential": true,
         "portMappings": [
@@ -31,11 +31,11 @@ EOT
 }
 
 resource "aws_ecs_cluster" "backend_cluster" {
-  name = "backend_cluster_example_app"
+  name = "eth_api_backend_cluster"
 }
 
 resource "aws_ecs_service" "backend_service" {
-  name = "backend_service"
+  name = "eth_api_backend_service"
 
   cluster         = aws_ecs_cluster.backend_cluster.id
   task_definition = aws_ecs_task_definition.backend_task.arn
@@ -45,7 +45,7 @@ resource "aws_ecs_service" "backend_service" {
 
   network_configuration {
     subnets          = ["${aws_subnet.public_a.id}", "${aws_subnet.public_b.id}"]
-    security_groups  = ["${aws_security_group.security_group_example_app.id}"]
+    security_groups  = ["${aws_security_group.security_group_eth_api.id}"]
     assign_public_ip = true
   }
 }

@@ -3,6 +3,8 @@
   "rules": {
     "camelcase": "off",
     "no-useless-constructor": "off",
-    "no-new": "off"
+    "no-new": "off",
+    "new-cap": "off",
+    "no-undef": "off"
   }
 }

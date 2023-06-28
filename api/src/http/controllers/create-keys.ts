@@ -1,6 +1,6 @@
 import { FastifyReply, FastifyRequest } from 'fastify'
 
-import { CreateKeysUseCase } from '@/use-cases/create-keys'
+import { CreateKeysUseCase } from '../../use-cases/create-keys'
 
 export async function createKeysController(
   request: FastifyRequest,

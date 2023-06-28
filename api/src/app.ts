@@ -6,10 +6,6 @@ import { routes } from './http/controllers/routes'
 
 export const app = fastify()
 
-app.get('/', async (_request, _reply) => {
-  return { message: 'Hello world!' }
-})
-
 app.register(routes)
 
 app.setErrorHandler((error, _request, reply) => {

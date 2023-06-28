@@ -1,7 +1,7 @@
 import { z } from 'zod'
 import { FastifyReply, FastifyRequest } from 'fastify'
-import { GenerateEthAddressUseCase } from '@/use-cases/generate-eth-address'
-import { ethereumPublicKeyRegex } from '@/utils/regex'
+import { GenerateEthAddressUseCase } from '../../use-cases/generate-eth-address'
+import { ethereumPublicKeyRegex } from '../../utils/regex'
 
 export async function generateEthAddressController(
   request: FastifyRequest,

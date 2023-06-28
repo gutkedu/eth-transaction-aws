@@ -1,27 +1,24 @@
 name: Run Unit Tests
 
-on:
-  push:
-    branches:
-      - main
+on: [push]
 
 jobs:
   run-unit-tests:
     name: Unit test
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./api
 
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
+      - uses: actions/setup-node@v3
         with:
           node-version: 16
           cache: 'npm'
+          cache-dependency-path: '**/package-lock.json'
       
-      - name: Change to API Directory
-        working-directory: ./api
-        run: |
-          npm ci
-          npm run test
+      - run: npm ci
+
+      - run: npm run test

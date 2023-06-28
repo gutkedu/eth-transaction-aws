@@ -13,17 +13,15 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
-      
+
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
           node-version: 16
           cache: 'npm'
       
-      - name: Install Dependencies
+      - name: Change to API Directory
         working-directory: ./api
-        run: npm ci
-      
-      - name: Run Tests
-        working-directory: ./api
-        run: npm run test
+        run: |
+          npm ci
+          npm run test

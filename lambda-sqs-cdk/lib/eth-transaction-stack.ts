@@ -6,13 +6,16 @@ import * as iam from "aws-cdk-lib/aws-iam";
 import * as lambda from "aws-cdk-lib/aws-lambda";
 import * as path from "path";
 
-export class CdkStack extends Stack {
+export class EthTransactionStack extends Stack {
   constructor(scope: Construct, id: string, props?: StackProps) {
     super(scope, id, props);
 
-    const queue = new sqs.Queue(this, "MySqsQueue");
+    const queue = new sqs.Queue(this, "EthTransactionQueue", {
+      queueName: "EthTransactionQueue",
+      visibilityTimeout: Duration.seconds(10),
+    });
 
-    const lambdaRole = new iam.Role(this, "QueueConsumerFunctionRole", {
+    const lambdaRole = new iam.Role(this, "EthTransactionLambdaRole", {
       assumedBy: new iam.ServicePrincipal("lambda.amazonaws.com"),
       managedPolicies: [
         iam.ManagedPolicy.fromAwsManagedPolicyName(
@@ -26,28 +29,31 @@ export class CdkStack extends Stack {
 
     const lambdaFunction = new lambdaNodejs.NodejsFunction(
       this,
-      "QueueConsumerFunction",
+      "EthTransactionLambda",
       {
-        functionName: "QueueConsumerFunction",
+        functionName: "EthTransactionLambdaFunction",
         entry: path.join(__dirname, "../src/app.ts"),
         handler: "handler",
         runtime: lambda.Runtime.NODEJS_16_X,
         role: lambdaRole,
-        timeout: Duration.seconds(2),
-        environment: {},
+        timeout: Duration.seconds(1),
+        environment: {
+          INFURA_GOERLI_URL: "",
+          ETH_API_URL: "",
+        },
         memorySize: 128,
       }
     );
 
-    new lambda.EventSourceMapping(this, "QueueConsumerFunctionMySQSEvent", {
+    new lambda.EventSourceMapping(this, "SQSEvent", {
       target: lambdaFunction,
       batchSize: 10,
       eventSourceArn: queue.queueArn,
     });
 
-    new CfnOutput(this, "QueueConsumerFunctionName", {
+    new CfnOutput(this, "FunctionName", {
       value: lambdaFunction.functionName,
-      description: "QueueConsumerFunction function name",
+      description: "function name",
     });
 
     new CfnOutput(this, "SQSqueueName", {

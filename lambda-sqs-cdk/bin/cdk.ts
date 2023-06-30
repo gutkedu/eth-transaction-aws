@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import "source-map-support/register";
 import { App, Environment } from "aws-cdk-lib";
-import { CdkStack } from "../lib/cdk-stack";
+import { EthTransactionStack } from "../lib/eth-transaction-stack";
 
 const app = new App();
 
@@ -15,7 +15,7 @@ const tags = {
   team: "gutkedu",
 };
 
-new CdkStack(app, "CdkStack", {
+new EthTransactionStack(app, "EthTransactionStack", {
   env,
   tags,
 });

@@ -2,18 +2,18 @@
 
 ## Lambda Function for Ethereum Transaction Processing
 
+This Lambda function is designed to be triggered for every new message received in an SQS queue. The message content should be an Ethereum transaction in the following format:
+
 <p align="center">
   <img alt="lambda-sqs" src="./docs/lambda-sqs.png" width="50%">
 </p>
 
-This Lambda function is designed to be triggered for every new message received in an SQS queue. The message content should be an Ethereum transaction in the following format:
-
-json
-
+```json
 {
   "to": "0xAbC123...",
   "value": "0x1bc16d674ec80000"
 }
+```
 
 The function performs the following steps:
 
@@ -24,7 +24,7 @@ The function performs the following steps:
 
 ## Environment Variables
 
-# INFURA_GOERLI_URL
+### INFURA_GOERLI_URL
 This project utilizes the Goerli testnet for Ethereum network connectivity. To establish a connection with the Goerli testnet, the Infura service is utilized. Follow the steps below to set up the Infura service and configure the project:
 
     Create an Infura Account: Sign up for an account on the Infura platform at infura.io to obtain the required credentials.
@@ -33,7 +33,7 @@ This project utilizes the Goerli testnet for Ethereum network connectivity. To e
 
     Set INFURA_GOERLI_URL Environment Variable: In your project's environment configuration, set the INFURA_GOERLI_URL environment variable to the appropriate value. This variable should be assigned the URL provided by Infura for Goerli testnet connectivity, including the Project ID.
 
-# ETH_API_URL
+### ETH_API_URL
 The URL provided serves as the endpoint for the eth-api service. To obtain this URL, follow the steps below:
 
     Access the ECS Task: Navigate to the ECS task associated with the project. Open the network tab or network configuration settings.

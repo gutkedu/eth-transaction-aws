@@ -2,9 +2,9 @@ Application Overview
 
 This application is built using a REST API and aims to provide functionality for Ethereum account management. It includes the following features:
 
-    Generation of Private Key and Public Key: Implements a method to generate a Private Key and a Public Key using the Elliptic Curve Digital Signature Algorithm (ECDSA) with the secp256k1 elliptic curve. These keys are essential for creating Ethereum accounts.
+- Generation of Private Key and Public Key: Implements a method to generate a Private Key and a Public Key using the Elliptic Curve Digital Signature Algorithm (ECDSA) with the secp256k1 elliptic curve. These keys are essential for creating Ethereum accounts.
 
-    Obtaining Ethereum EOA (Wallet) Address: Implements a method to obtain the Ethereum EOA (Wallet) address from the Public Key generated using ECDSA.
+- Obtaining Ethereum EOA (Wallet) Address: Implements a method to obtain the Ethereum EOA (Wallet) address from the Public Key generated using ECDSA.
 
 Getting Started
 
@@ -50,9 +50,6 @@ docker build -f Dockerfile -t eth-api .
 ## Deployment
 
 ```bash
-#Build image
-docker build -f Dockerfile -t eth-api .
-
 cd deployment/
 # Init terraform
 terraform init

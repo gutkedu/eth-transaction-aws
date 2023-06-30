@@ -17,9 +17,10 @@ This Lambda function is designed to be triggered for every new message received 
 
 The function performs the following steps:
 
-    Utilizes the previously created service (eth-api) to obtain a Private Key.
-    Signs the transaction using the obtained Private Key with its address.
-    Sends the signed transaction to an EVM (Ethereum Virtual Machine) Blockchain. In this case it was utilized the goerli testnet.
+- Process a event message received by sqs that contains the to address and a value for the transaction.
+- Utilizes the previously created service (eth-api) to obtain a Private Key and a address to be the "from" for the transaction.
+- Signs the transaction using the obtained Private Key with its address.
+- Sends the signed transaction to an EVM (Ethereum Virtual Machine) Blockchain. In this case it was utilized the Goerli testnet.
 
 
 ## Environment Variables

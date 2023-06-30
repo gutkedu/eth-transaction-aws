@@ -36,7 +36,7 @@ export class EthTransactionStack extends Stack {
         handler: "handler",
         runtime: lambda.Runtime.NODEJS_16_X,
         role: lambdaRole,
-        timeout: Duration.seconds(1),
+        timeout: Duration.seconds(3),
         environment: {
           INFURA_GOERLI_URL: "",
           ETH_API_URL: "",

@@ -26,14 +26,11 @@ export class Web3Provider implements IWeb3Provider {
       "latest"
     );
 
-    const gasPrice = await this.web3.eth.getGasPrice();
-
     const signedTransaction = await this.web3.eth.accounts.signTransaction(
       {
         to: toAddress,
         value: amountInWei,
-        gas: "21000",
-        gasPrice,
+        gas: 21000,
         nonce,
         chainId: this.GOERLI_CHAIN_ID,
         chain: "goerli",
